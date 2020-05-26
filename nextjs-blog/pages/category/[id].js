@@ -26,14 +26,7 @@ export default function Category({ categoryData }) {
 }
 
 export async function getStaticPaths() {
-    const test = await getAllCategoryPaths()
-    const paths = [
-        {
-            params: {
-                id: 'test'
-            },
-        }
-    ];
+    const paths = await getAllCategoryPaths()
     return {
         paths,
         fallback: false
@@ -44,9 +37,14 @@ export async function getAllCategoryPaths() {
     const queryResult = await (await apolloClient()).query({
         query: CATEGORY_QUERY
     });
-
-    const paths = queryResult.data.categoryList.map((category) => category.url_key)
-    return paths;
+    
+    return queryResult.data.categoryList.map(category => {
+        return {
+            params: {
+                id: category.url_key
+            }
+        }
+    })
 }
 
 export async function getStaticProps({ params }) {
