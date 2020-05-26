@@ -2,7 +2,7 @@ import Head from 'next/head'
 
 import Layout from '../../components/layout'
 import { request } from 'graphql-request';
-import CATEGORY_QUERY from './category.query';
+import CATEGORY_QUERY from '../../lib/category.query';
 import apolloClient from '../../lib/apollo-client';
 
 import utilStyles from '../../styles/utils.module.css'
